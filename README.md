@@ -22,7 +22,7 @@ Add the package in the OpenCode config directory `package.json`:
 ```json
 {
   "dependencies": {
-    "opencode-policy": "github:YOUR_GITHUB_NAME/opencode-policy"
+    "opencode-policy": "github:tjvjk/opencode-policy"
   }
 }
 ```
