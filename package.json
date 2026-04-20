@@ -1,0 +1,33 @@
+{
+  "name": "opencode-policy",
+  "version": "0.1.0",
+  "description": "OpenCode plugin for blocked file patterns and prompt injection policies",
+  "type": "module",
+  "exports": {
+    ".": "./src/opencode-policy.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "plugin",
+    "security",
+    "prompt-injection"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tjvjk/opencode-policy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tjvjk/opencode-policy/issues"
+  },
+  "homepage": "https://github.com/tjvjk/opencode-policy#readme"
+}
