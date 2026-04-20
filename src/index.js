@@ -1,7 +1,8 @@
-import { rules } from "./rules.js"
+import { protect } from "./rules.js"
+import { inject } from "./rules.js"
 
 /**
- * OpenCode plugin with extensible file access policies
+ * OpenCode plugin with extensible blocked patterns
  *
  * Usage:
  * Add the package name to the `plugin` array in `opencode.json`
@@ -10,10 +11,21 @@ const OpencodePolicy = async () => {
   return {
     "tool.execute.before": async (_input, output) => {
       const path = String(output?.args?.filePath ?? "")
-      const file = path.replaceAll("\\", "/")
-      for (const rule of rules) {
-        if (rule.match(file)) {
-          throw new Error(rule.message)
+      const rule = protect(path)
+      if (rule) {
+        throw new Error(rule.reason)
+      }
+      const values = [
+        String(output?.args?.command ?? ""),
+        String(output?.args?.text ?? ""),
+        String(output?.args?.prompt ?? ""),
+        String(output?.args?.query ?? ""),
+        path,
+      ]
+      for (const value of values) {
+        const injection = inject(value)
+        if (injection) {
+          throw new Error(injection.reason)
         }
       }
     },

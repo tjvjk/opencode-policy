@@ -1,0 +1,7 @@
+[
+  {
+    "id": "env-file-1",
+    "pattern": "(^|/)\\.env(\\..+)?$",
+    "reason": "Access to protected files is forbidden"
+  }
+]

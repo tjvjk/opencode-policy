@@ -1,8 +1,11 @@
 # opencode-policy
 
-OpenCode plugin with extensible file access policies built on the `tool.execute.before` hook.
+OpenCode plugin with two rule directions:
 
-The repository ships with one default rule for `.env` files, and new rules can be added in `src/rules.js` without changing the plugin entrypoint.
+- blocked patterns
+- prompt injections
+
+The repository ships with one blocked pattern for `.env` files and one prompt injection rule for instruction reset attempts.
 
 ## What it does today
 
@@ -10,6 +13,7 @@ The repository ships with one default rule for `.env` files, and new rules can b
 - `.env.local`
 - `.env.production`
 - `apps/web/.env`
+- `forget all instructions`
 
 ## Install from GitHub
 
@@ -62,6 +66,9 @@ npm test
 ## Repository layout
 
 - `src/index.js`: plugin entrypoint
-- `src/rules.js`: file blocking rules
-- `test/index.test.js`: smoke tests
+- `src/policies/blocked-patterns.json`: blocked patterns
+- `src/policies/prompt-injection-patterns.json`: prompt injection patterns
+- `src/rules.js`: rule loading and matching
+- `test/blocked-patterns.test.js`: blocked pattern tests
+- `test/prompt-injections.test.js`: prompt injection tests
 - `examples/opencode.json`: example OpenCode config

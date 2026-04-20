@@ -1,0 +1,7 @@
+[
+  {
+    "id": "forget-en-1",
+    "pattern": "forget\\s+(all\\s+)?(instructions|rules|prompt)",
+    "reason": "Attempt to reset instructions (EN)"
+  }
+]

@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 
 import OpencodePolicy from "../src/index.js"
-import { rules } from "../src/rules.js"
+import { blocked, protect } from "../src/rules.js"
 
 test("The plugin cannot block access to protected files late", async () => {
   const plugin = await OpencodePolicy()
@@ -20,6 +20,10 @@ test("The plugin does not block regular files", async () => {
   )
 })
 
-test("The rules list does contain at least one file policy", async () => {
-  assert.notEqual(rules.length, 0, "The rules list is unexpectedly empty")
+test("The blocked patterns list does contain at least one rule", async () => {
+  assert.notEqual(blocked.length, 0, "The blocked patterns list is unexpectedly empty")
+})
+
+test("The blocked matcher does detect dot env files", async () => {
+  assert.notEqual(protect(`tmp/token-${Math.random()}/.env`), null, "The blocked matcher unexpectedly misses dot env files")
 })
