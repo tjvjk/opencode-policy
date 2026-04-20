@@ -1,7 +1,7 @@
 {
-  "name": "opencode-env-protection",
+  "name": "opencode-policy",
   "version": "0.1.0",
-  "description": "OpenCode plugin that blocks access to .env files",
+  "description": "OpenCode plugin with extensible file access policies",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
@@ -19,7 +19,7 @@
     "opencode",
     "plugin",
     "security",
-    "env"
+    "policy"
   ],
   "license": "MIT"
 }

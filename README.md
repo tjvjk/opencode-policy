@@ -1,8 +1,10 @@
-# opencode-env-protection
+# opencode-policy
 
-OpenCode plugin that blocks access to `.env` files through the `tool.execute.before` hook.
+OpenCode plugin with extensible file access policies built on the `tool.execute.before` hook.
 
-## What it blocks
+The repository ships with one default rule for `.env` files, and new rules can be added in `src/rules.js` without changing the plugin entrypoint.
+
+## What it does today
 
 - `.env`
 - `.env.local`
@@ -16,7 +18,7 @@ Add the package in the OpenCode config directory `package.json`:
 ```json
 {
   "dependencies": {
-    "opencode-env-protection": "github:YOUR_GITHUB_NAME/opencode-env-protection"
+    "opencode-policy": "github:YOUR_GITHUB_NAME/opencode-policy"
   }
 }
 ```
@@ -26,7 +28,7 @@ Then enable it in `opencode.json`:
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-env-protection"]
+  "plugin": ["opencode-policy"]
 }
 ```
 
@@ -37,7 +39,7 @@ After publishing to npm:
 ```json
 {
   "dependencies": {
-    "opencode-env-protection": "^0.1.0"
+    "opencode-policy": "^0.1.0"
   }
 }
 ```
@@ -47,7 +49,7 @@ Use the same `opencode.json` plugin entry:
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-env-protection"]
+  "plugin": ["opencode-policy"]
 }
 ```
 
@@ -60,5 +62,6 @@ npm test
 ## Repository layout
 
 - `src/index.js`: plugin entrypoint
+- `src/rules.js`: file blocking rules
 - `test/index.test.js`: smoke tests
 - `examples/opencode.json`: example OpenCode config

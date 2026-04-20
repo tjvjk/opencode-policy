@@ -1,20 +1,24 @@
+import { rules } from "./rules.js"
+
 /**
- * OpenCode plugin that forbids access to `.env` files
+ * OpenCode plugin with extensible file access policies
  *
  * Usage:
  * Add the package name to the `plugin` array in `opencode.json`
  */
-const EnvProtection = async () => {
+const OpencodePolicy = async () => {
   return {
     "tool.execute.before": async (_input, output) => {
       const path = String(output?.args?.filePath ?? "")
       const file = path.replaceAll("\\", "/")
-      if (/(^|\/)\.env(\..+)?$/.test(file)) {
-        throw new Error("Access to .env files is forbidden")
+      for (const rule of rules) {
+        if (rule.match(file)) {
+          throw new Error(rule.message)
+        }
       }
     },
   }
 }
 
-export { EnvProtection }
-export default EnvProtection
+export { OpencodePolicy }
+export default OpencodePolicy
