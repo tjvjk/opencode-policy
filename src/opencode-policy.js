@@ -36,7 +36,7 @@ const listed = (list) => {
   return list.flatMap((part) => parts(part))
 }
 
-const blockedPatterns = async (client, input, output) => {
+const unsafeToolPatterns = async (client, input, output) => {
   const path = String(output?.args?.filePath ?? "")
   await record(client, "debug", "tool.execute.before", {
     tool: preview(input?.tool),
@@ -48,7 +48,7 @@ const blockedPatterns = async (client, input, output) => {
   })
   const rule = protect(path)
   if (rule) {
-    await record(client, "warn", "blocked pattern matched", {
+    await record(client, "warn", "unsafe tool pattern matched", {
       id: preview(rule.id),
       reason: preview(rule.reason),
       filePath: preview(path),
@@ -72,12 +72,21 @@ const blockedPatterns = async (client, input, output) => {
   for (const value of values) {
     const rule = protect(value)
     if (rule) {
-      await record(client, "warn", "blocked pattern matched", {
+      await record(client, "warn", "unsafe tool pattern matched", {
         id: preview(rule.id),
         reason: preview(rule.reason),
         value: preview(value),
       })
       deny(rule.reason)
+    }
+    const injection = inject(value)
+    if (injection) {
+      await record(client, "warn", "prompt injection matched", {
+        id: preview(injection.id),
+        reason: preview(injection.reason),
+        value: preview(value),
+      })
+      deny(injection.reason)
     }
   }
 }
@@ -105,7 +114,7 @@ const promptInjectionPatterns = async (client, _input, output) => {
 }
 
 /**
- * OpenCode plugin with extensible blocked patterns
+ * OpenCode plugin with extensible unsafe tool patterns
  *
  * Usage:
  * Add the package name to the `plugin` array in `opencode.json`
@@ -113,6 +122,6 @@ const promptInjectionPatterns = async (client, _input, output) => {
 export const OpencodePolicy = async ({ client } = {}) => {
   return {
     "experimental.chat.messages.transform": async (input, output) => promptInjectionPatterns(client, input, output),
-    "tool.execute.before": async (input, output) => blockedPatterns(client, input, output),
+    "tool.execute.before": async (input, output) => unsafeToolPatterns(client, input, output),
   }
 }

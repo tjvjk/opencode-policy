@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 
 import { OpencodePolicy } from "../src/opencode-policy.js"
-import { blocked, protect } from "../src/opencode-policy-rules.js"
+import { protect, unsafe } from "../src/opencode-policy-rules.js"
 
 const cases = {
   "env-direct-1": "env",
@@ -262,21 +262,21 @@ const cases = {
   "find-workspace": "find ../",
 }
 
-test("The blocked patterns cases do match the blocked rules list", async () => {
-  assert.deepEqual(Object.keys(cases).sort(), blocked.map((rule) => rule.id).sort(), "The blocked pattern test cases unexpectedly drift from the blocked rules list")
+test("The unsafe tool patterns cases do match the unsafe tool rules list", async () => {
+  assert.deepEqual(Object.keys(cases).sort(), unsafe.map((rule) => rule.id).sort(), "The unsafe tool pattern test cases unexpectedly drift from the unsafe tool rules list")
 })
 
-for (const rule of blocked) {
-  test(`The blocked matcher does detect ${rule.id}`, async () => {
-    assert.equal(protect(cases[rule.id])?.id, rule.id, `The blocked matcher unexpectedly misses ${rule.id}`)
+for (const rule of unsafe) {
+  test(`The unsafe tool matcher does detect ${rule.id}`, async () => {
+    assert.equal(protect(cases[rule.id])?.id, rule.id, `The unsafe tool matcher unexpectedly misses ${rule.id}`)
   })
 }
 
-test("The plugin cannot allow blocked command arguments", async () => {
+test("The plugin cannot allow unsafe tool command arguments", async () => {
   const plugin = await OpencodePolicy()
   await assert.rejects(
     plugin["tool.execute.before"]({}, { args: { command: "printenv" } }),
-    "The plugin wrongly allows blocked command arguments",
+    "The plugin wrongly allows unsafe tool command arguments",
   )
 })
 

@@ -2,12 +2,12 @@
 
 OpenCode plugin with two rule sets:
 
-- blocked patterns (282)
+- unsafe tool patterns (282)
 - prompt injection patterns (27)
 
 Total rules: 309
 
-The repository ships with blocked command and path rules for secret access, exfiltration, unsafe execution, reverse shells, denial of service, and cross-workspace access, plus prompt injection rules for instruction overrides, fake role tags, jailbreak phrases, prompt extraction, and encoded payloads.
+The repository ships with unsafe tool command and path rules for secret access, exfiltration, unsafe execution, reverse shells, denial of service, and cross-workspace access, plus prompt injection rules for instruction overrides, fake role tags, jailbreak phrases, prompt extraction, and encoded payloads.
 
 ## What it does today
 
@@ -45,7 +45,7 @@ When published, add the package to your OpenCode config:
 node --test
 ```
 
-Blocked-pattern coverage lives in `test/blocked-patterns.test.js` and covers every rule in `src/policies/blocked-patterns.json`.
+Unsafe-tool-pattern coverage lives in `test/unsafe-tool-patterns.test.js` and covers every rule in `src/policies/unsafe-tool-patterns.json`.
 
 Prompt injection coverage lives in `test/prompt-injections.test.js` and includes the rules from `src/policies/prompt-injection-patterns.json`.
 
@@ -53,8 +53,8 @@ Prompt injection coverage lives in `test/prompt-injections.test.js` and includes
 
 - `src/opencode-policy.js`: plugin entrypoint
 - `src/opencode-policy-rules.js`: rule loading and matching
-- `src/policies/blocked-patterns.json`: blocked patterns
+- `src/policies/unsafe-tool-patterns.json`: unsafe tool patterns
 - `src/policies/prompt-injection-patterns.json`: prompt injection patterns
-- `test/blocked-patterns.test.js`: blocked pattern tests
+- `test/unsafe-tool-patterns.test.js`: unsafe tool pattern tests
 - `test/prompt-injections.test.js`: prompt injection tests
 - `examples/opencode.json`: example npm plugin config
