@@ -36,7 +36,7 @@ const listed = (list) => {
   return list.flatMap((part) => parts(part))
 }
 
-const before = async (client, input, output) => {
+const blockedPatterns = async (client, input, output) => {
   const path = String(output?.args?.filePath ?? "")
   await record(client, "debug", "tool.execute.before", {
     tool: preview(input?.tool),
@@ -82,7 +82,7 @@ const before = async (client, input, output) => {
   }
 }
 
-const transform = async (client, _input, output) => {
+const promptInjectionPatterns = async (client, _input, output) => {
   for (const message of output?.messages ?? []) {
     if (message?.info?.role !== "user") {
       continue
@@ -112,7 +112,7 @@ const transform = async (client, _input, output) => {
  */
 export const OpencodePolicy = async ({ client } = {}) => {
   return {
-    "experimental.chat.messages.transform": async (input, output) => transform(client, input, output),
-    "tool.execute.before": async (input, output) => before(client, input, output),
+    "experimental.chat.messages.transform": async (input, output) => promptInjectionPatterns(client, input, output),
+    "tool.execute.before": async (input, output) => blockedPatterns(client, input, output),
   }
 }
