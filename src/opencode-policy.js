@@ -70,14 +70,14 @@ const blockedPatterns = async (client, input, output) => {
     argsCommand: preview(output?.args?.command),
   })
   for (const value of values) {
-    const injection = inject(value)
-    if (injection) {
-      await record(client, "warn", "prompt injection matched", {
-        id: preview(injection.id),
-        reason: preview(injection.reason),
+    const rule = protect(value)
+    if (rule) {
+      await record(client, "warn", "blocked pattern matched", {
+        id: preview(rule.id),
+        reason: preview(rule.reason),
         value: preview(value),
       })
-      deny(injection.reason)
+      deny(rule.reason)
     }
   }
 }

@@ -13,7 +13,7 @@ const match = (rules, value) => {
   return null
 }
 
-const protect = (file) => match(blocked, file.replaceAll("\\", "/"))
+const protect = (file) => match(blocked, file)
 const inject = (text) => match(injections, text)
 
 export { blocked, inject, injections, protect }
