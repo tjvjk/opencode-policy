@@ -1,0 +1,14 @@
+node_modules/
+.opencode/
+coverage/
+dist/
+.DS_Store
+*.log
+.env
+.env.*
+package-lock.json
+bun.lock
+yarn.lock
+pnpm-lock.yaml
+
+AGENTS.md

@@ -1,0 +1,25 @@
+{
+  "name": "opencode-env-protection",
+  "version": "0.1.0",
+  "description": "OpenCode plugin that blocks access to .env files",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "opencode",
+    "plugin",
+    "security",
+    "env"
+  ],
+  "license": "MIT"
+}
