@@ -2,6 +2,7 @@ node_modules/
 .opencode/
 coverage/
 dist/
+tmp/
 .DS_Store
 *.log
 .env
