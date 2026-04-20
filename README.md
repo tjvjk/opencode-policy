@@ -1,23 +1,21 @@
 # opencode-policy
 
-OpenCode plugin with two rule directions:
+OpenCode plugin with two rule sets:
 
 - blocked patterns
-- prompt injections
+- prompt injection patterns
 
-The repository ships with one blocked pattern for `.env` files and one prompt injection rule for instruction reset attempts.
+The repository ships with blocked file rules for `.env` paths and prompt injection rules for instruction reset attempts.
 
 ## What it does today
 
-- `.env`
-- `.env.local`
-- `.env.production`
-- `apps/web/.env`
-- `forget all instructions`
+- blocks protected file access in `tool.execute.before`
+- rewrites matching user prompts in `experimental.chat.messages.transform`
+- logs matches to `.opencode/opencode-policy.log`
 
 ## Install locally
 
-Until the package is published to npm, install it as a local OpenCode plugin:
+Install it as a project-local OpenCode plugin:
 
 1. Copy `src/opencode-policy.js` to `<your-project>/.opencode/plugins/opencode-policy.js`
 2. Copy `src/opencode-policy-rules.js` to `<your-project>/.opencode/plugins/opencode-policy-rules.js`
@@ -30,17 +28,7 @@ Use namespaced file names like `opencode-policy.js` instead of generic names lik
 
 ## Install from npm
 
-After publishing to npm:
-
-```json
-{
-  "dependencies": {
-    "opencode-policy": "^0.1.0"
-  }
-}
-```
-
-Use the same `opencode.json` plugin entry:
+When published, add the package to your OpenCode config:
 
 ```json
 {
@@ -52,7 +40,7 @@ Use the same `opencode.json` plugin entry:
 ## Local development
 
 ```bash
-npm test
+node --test
 ```
 
 ## Repository layout
@@ -63,4 +51,4 @@ npm test
 - `src/policies/prompt-injection-patterns.json`: prompt injection patterns
 - `test/blocked-patterns.test.js`: blocked pattern tests
 - `test/prompt-injections.test.js`: prompt injection tests
-- `examples/opencode.json`: example OpenCode config
+- `examples/opencode.json`: example npm plugin config
