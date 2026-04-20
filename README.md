@@ -2,14 +2,16 @@
 
 OpenCode plugin with two rule sets:
 
-- blocked patterns
-- prompt injection patterns
+- blocked patterns (282)
+- prompt injection patterns (27)
 
-The repository ships with blocked file rules for `.env` paths and prompt injection rules for instruction overrides, fake role tags, jailbreak phrases, prompt extraction, and encoded payloads.
+Total rules: 309
+
+The repository ships with blocked command and path rules for secret access, exfiltration, unsafe execution, reverse shells, denial of service, and cross-workspace access, plus prompt injection rules for instruction overrides, fake role tags, jailbreak phrases, prompt extraction, and encoded payloads.
 
 ## What it does today
 
-- blocks protected file access in `tool.execute.before`
+- blocks matching tool arguments in `tool.execute.before`
 - rewrites matching user prompts in `experimental.chat.messages.transform`
 - logs matches to `.opencode/opencode-policy.log`
 
@@ -42,6 +44,8 @@ When published, add the package to your OpenCode config:
 ```bash
 node --test
 ```
+
+Blocked-pattern coverage lives in `test/blocked-patterns.test.js` and covers every rule in `src/policies/blocked-patterns.json`.
 
 Prompt injection coverage lives in `test/prompt-injections.test.js` and includes the rules from `src/policies/prompt-injection-patterns.json`.
 
