@@ -88,10 +88,6 @@ const transform = async (client, _input, output) => {
       continue
     }
     const values = listed(Array.isArray(message?.parts) ? message.parts : [])
-    await record(client, "debug", "experimental.chat.messages.transform", {
-      role: preview(message?.info?.role),
-      values: values.map(preview),
-    })
     for (const value of values) {
       const injection = inject(value)
       if (!injection) {
