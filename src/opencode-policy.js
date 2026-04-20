@@ -1,5 +1,5 @@
-import { protect } from "./rules.js"
-import { inject } from "./rules.js"
+import { protect } from "./opencode-policy-rules.js"
+import { inject } from "./opencode-policy-rules.js"
 
 /**
  * OpenCode plugin with extensible blocked patterns

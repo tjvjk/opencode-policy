@@ -1,8 +1,8 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 
-import OpencodePolicy from "../src/index.js"
-import { inject, injections } from "../src/rules.js"
+import OpencodePolicy from "../src/opencode-policy.js"
+import { inject, injections } from "../src/opencode-policy-rules.js"
 
 test("The prompt injection patterns list does contain at least one rule", async () => {
   assert.notEqual(injections.length, 0, "The prompt injection patterns list is unexpectedly empty")

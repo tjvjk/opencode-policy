@@ -1,8 +1,8 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 
-import OpencodePolicy from "../src/index.js"
-import { blocked, protect } from "../src/rules.js"
+import OpencodePolicy from "../src/opencode-policy.js"
+import { blocked, protect } from "../src/opencode-policy-rules.js"
 
 test("The plugin cannot block access to protected files late", async () => {
   const plugin = await OpencodePolicy()

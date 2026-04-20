@@ -15,26 +15,18 @@ The repository ships with one blocked pattern for `.env` files and one prompt in
 - `apps/web/.env`
 - `forget all instructions`
 
-## Install from GitHub
+## Install locally
 
-Add the package in the OpenCode config directory `package.json`:
+Until the package is published to npm, install it as a local OpenCode plugin:
 
-```json
-{
-  "dependencies": {
-    "opencode-policy": "github:tjvjk/opencode-policy"
-  }
-}
-```
+1. Copy `src/opencode-policy.js` to `<your-project>/.opencode/plugins/opencode-policy.js`
+2. Copy `src/opencode-policy-rules.js` to `<your-project>/.opencode/plugins/opencode-policy-rules.js`
+3. Copy `src/policies/` to `<your-project>/.opencode/plugins/policies/`
+4. Restart OpenCode
 
-Then enable it in `opencode.json`:
+OpenCode loads project-local plugins automatically from `.opencode/plugins/`, so no `plugin` entry in `opencode.json` is required for this setup.
 
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-policy"]
-}
-```
+Use namespaced file names like `opencode-policy.js` instead of generic names like `index.js`. This avoids collisions when multiple local plugins live in the same `.opencode/plugins/` directory.
 
 ## Install from npm
 
@@ -65,10 +57,10 @@ npm test
 
 ## Repository layout
 
-- `src/index.js`: plugin entrypoint
+- `src/opencode-policy.js`: plugin entrypoint
+- `src/opencode-policy-rules.js`: rule loading and matching
 - `src/policies/blocked-patterns.json`: blocked patterns
 - `src/policies/prompt-injection-patterns.json`: prompt injection patterns
-- `src/rules.js`: rule loading and matching
 - `test/blocked-patterns.test.js`: blocked pattern tests
 - `test/prompt-injections.test.js`: prompt injection tests
 - `examples/opencode.json`: example OpenCode config
