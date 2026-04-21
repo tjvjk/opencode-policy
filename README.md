@@ -16,7 +16,13 @@ Use it when you want stronger workspace safety out of the box: it helps prevent 
 
 ## Install from npm
 
-Add it to your OpenCode config:
+Install the package:
+
+```bash
+npm install opencode-policy
+```
+
+Then add it to your OpenCode config:
 
 ```json
 {
