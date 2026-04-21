@@ -1,8 +1,9 @@
 {
   "name": "opencode-policy",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "OpenCode plugin for blocked file patterns and prompt injection policies",
   "type": "module",
+  "main": "./src/opencode-policy.js",
   "exports": {
     ".": "./src/opencode-policy.js"
   },

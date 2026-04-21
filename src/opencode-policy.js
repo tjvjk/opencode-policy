@@ -125,3 +125,5 @@ export const OpencodePolicy = async ({ client } = {}) => {
     "tool.execute.before": async (input, output) => unsafeToolPatterns(client, input, output),
   }
 }
+
+export default OpencodePolicy

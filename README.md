@@ -22,7 +22,10 @@ Install the package:
 npm install opencode-policy
 ```
 
-Then add it to your OpenCode config:
+Then add it to one of these OpenCode config files:
+
+- `~/.config/opencode/opencode.json` for your user
+- `opencode.json` in your project root for one project
 
 ```json
 {
