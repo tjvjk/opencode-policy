@@ -1,4 +1,4 @@
-# opencode-policy
+# Opencode policy
 
 OpenCode security plugin with:
 - [282 unsafe tool patterns](./src/policies/unsafe-tool-patterns.json)
