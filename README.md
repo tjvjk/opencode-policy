@@ -14,6 +14,12 @@ Prompt injection patterns
 
 Use it when you want stronger workspace safety out of the box: it helps prevent secret exposure, exfiltration, unsafe shell execution, reverse shells, denial-of-service commands, cross-workspace access, and common instruction-override attacks. Matching events are logged to `.opencode/opencode-policy.log` for review.
 
+## Simple install
+
+```bash
+opencode plugin opencode-policy@latest --global
+```
+
 ## Install from npm
 
 Install the package:
